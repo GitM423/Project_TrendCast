@@ -3,8 +3,14 @@ import List from "./List";
 
 const Overview = () => {
   return (
-    <section>
-      <List searchInput="DE" />
+    <section id="overview">
+      <div className="overview-header">
+        <div className="overview-results">Podcasts from Germany</div>
+      </div>
+      <List
+        searchInput={"DE"}
+        // type={"show"}
+      />
     </section>
   );
 };

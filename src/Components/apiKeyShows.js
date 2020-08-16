@@ -1,3 +1,0 @@
-const apiKey =
-  "BQCSbvfrS3pvtDT-CScAoTjOeRUcz-cox6zatcuWN6Q4J11D0ZnHMtgvrkb3goiCU6TEP0q66do1xM6-Ob7i1TZ-DxwQkzZO3Rbx8Fd9nAmyCYa_4xBxSfQLEXKIGBBG4rXKWGKpqe2bTnUXOX7Q4Kx_fnCjx9jMf_dQDhTA2htyTLvJYKHwBvk";
-export default apiKey;

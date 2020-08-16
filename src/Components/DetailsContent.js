@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Episode from "./Episode";
 
 class DetailsContent extends Component {
   state = {
@@ -7,24 +8,39 @@ class DetailsContent extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <div>
-            <img src={this.props.image} alt="" />
+      <div className="details">
+        <div className="details-compact">
+          <div className="details-image">
+            <a href={this.props.external}>
+              <img src={this.props.image} alt="" />
+            </a>
           </div>
-          <div>
-            <h1>Bon Appétit Foodcast</h1>
+          <div className="details-information">
+            <h1>{this.props.data.name}</h1>
             <button className="button">Follow</button>
             <button className="button">Share</button>
-            <p>{this.state.data.description}</p>
+            <p>{this.props.data.description}</p>
           </div>
         </div>
-        <div className="episodes">
+        <div className="episodes-overview">
           <h2>Episodes</h2>
-          <div>first episodes map</div>
-          <a className="show-more" href={this.state.data}>
-            Show More
-          </a>
+          <div className="episode-list">
+            {this.props.episodes.map((obj) => {
+              return (
+                <Episode
+                  key={obj.id}
+                  audio={obj.audio_preview_url}
+                  name={obj.name}
+                  date={obj.release_date}
+                  duration={obj.duration_ms}
+                  description={obj.description}
+                />
+              );
+            })}
+          </div>
+          <div className="details-show-more">
+            <a href={this.props.external}>Show More</a>
+          </div>
         </div>
       </div>
     );

@@ -2,13 +2,13 @@ import React from "react";
 
 const Home = () => {
   return (
-    <section>
+    <section id="home">
       <h1>Welcome to TrendCast</h1>
-      <p>
+      <h2>
         Audio News, Sports and Entertainment, now with exclusive contect from
         your favorite podcasts.
-      </p>
-      <button class="btn-large">Get started </button>
+      </h2>
+      <a href="/Overview">Get started</a>
       <p>Available in the App Stores</p>
     </section>
   );

@@ -1,40 +1,48 @@
 import React, { Component } from "react";
-import apiKeyShows from "./apiKeyShows";
+import apiKey from "./apiKey";
 import DetailsContent from "./DetailsContent";
 
 class Details extends Component {
   state = {
     data: {},
     episodes: [],
+    image: "",
+    external: "",
   };
 
   componentDidMount() {
     fetch(`https://api.spotify.com/v1${this.props.location.pathname}`, {
       headers: {
-        Authorization: "Bearer " + apiKeyShows,
+        Authorization: "Bearer " + apiKey,
       },
     })
       .then((response) => response.json())
       .then((json) => {
         this.setState({ data: json });
-        console.log(this.state.data);
+        console.log("podcast-data:", this.state.data);
       })
       .then(() => {
-        console.log(this.state.data.episodes);
-
-        this.setState({ episodes: this.state.data.episodes });
-        console.log(this.state.episodes);
-        console.log(this.state.data.images[0].url);
+        this.setState({ episodes: this.state.data.episodes.items });
+        console.log("episodes:", this.state.episodes);
+      })
+      .then(() => {
+        this.setState({ image: this.state.data.images[0].url });
+        console.log("image:", this.state.image);
+      })
+      .then(() => {
+        this.setState({ external: this.state.data.external_urls.spotify });
+        console.log("external:", this.state.external);
       });
   }
 
   render() {
     return (
-      <section>
+      <section id="details">
         <DetailsContent
           data={this.state.data}
-          image={this.state.data.images[0].url}
           episodes={this.state.episodes}
+          image={this.state.image}
+          external={this.state.external}
         />
       </section>
     );
