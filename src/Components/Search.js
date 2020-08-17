@@ -14,6 +14,7 @@ class Search extends Component {
       extendedSearch: false,
       typeInput: "show",
       exName: "",
+      yearRangeChecked: false,
     };
   }
   componentDidUpdate() {
@@ -22,7 +23,10 @@ class Search extends Component {
     }
   }
   handleSearch = () => {
-    if (this.state.inputValue !== this.state.inputPlaceholder) {
+    if (
+      this.state.inputValue !== this.state.inputPlaceholder &&
+      this.state.inputValue !== ""
+    ) {
       this.setState({ pageChange: true });
       this.setState({ noSearch: false });
 
@@ -58,6 +62,12 @@ class Search extends Component {
   handleExName = (event) => {
     this.setState({ exName: event.target.value });
   };
+  handleYearCheck = () => {
+    this.setState({ yearRangeChecked: false });
+  };
+  handleYearRangeCheck = () => {
+    this.setState({ yearRangeChecked: true });
+  };
 
   handleKeyUp = (event) => {
     if (event.keyCode === 13) {
@@ -76,6 +86,7 @@ class Search extends Component {
               <input
                 type="text"
                 value={this.state.inputValue}
+                className="simple-search-text"
                 onChange={(event) => this.handleChange(event)}
                 onFocus={this.handlePlaceholder}
                 onBlur={this.handlePlaceholder}
@@ -85,29 +96,95 @@ class Search extends Component {
               <input
                 type="button"
                 value={this.state.extendedSearch ? "-" : "+"}
+                className="simple-search-expand"
                 onClick={this.handleExtendedSearch}
               />
             </div>
+
             <div
               className={
                 this.state.extendedSearch ? "extended-search" : "hidden"
               }
             >
+              <h2> Refine your search:</h2>
               <div className="extended-search-para">
-                <label>
-                  Name:{" "}
-                  <input
-                    type="text"
-                    onChange={(event) => this.handleExName(event)}
-                  />
-                </label>
-                <label>
-                  Name:{" "}
-                  <input
-                    type="text"
-                    onChange={(event) => this.handleExName(event)}
-                  />
-                </label>
+                <div className="extended-search-para-all">
+                  <div className="para">
+                    <label>
+                      <h3>Album: </h3>
+                      <input
+                        type="text"
+                        onChange={(event) => this.handleExAlbum(event)}
+                      />
+                    </label>
+
+                    <label>
+                      <h3>Artist: </h3>
+                      <input
+                        type="text"
+                        onChange={(event) => this.handleExArtist(event)}
+                      />
+                    </label>
+
+                    <label>
+                      <h3>Track: </h3>
+                      <input
+                        type="text"
+                        onChange={(event) => this.handleExTrack(event)}
+                      />
+                    </label>
+                  </div>
+                  <div className="para-year">
+                    <label>
+                      <h3>Year: </h3>
+                      <input
+                        type="radio"
+                        name="year"
+                        checked={!this.state.yearRangeChecked}
+                        onClick={this.handleYearCheck}
+                      />
+                    </label>
+                    <label>
+                      <h3>Range: </h3>
+                      <input
+                        type="radio"
+                        name="year"
+                        checked={this.state.yearRangeChecked}
+                        onClick={this.handleYearRangeCheck}
+                      />
+                    </label>
+                    <div className="para-year-value">
+                      <input
+                        type="text"
+                        onChange={(event) => this.handleExTrack(event)}
+                      />
+                      <h3>-</h3>
+                      <input
+                        type="text"
+                        onChange={(event) => this.handleExTrack(event)}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="extended-search-para-all">
+                  <div class="para">
+                    <label>
+                      <h3>Album:</h3>
+                      <input type="text" />
+                    </label>
+
+                    <label>
+                      <h3>Artist:</h3>
+                      <input type="text" />
+                    </label>
+
+                    <label>
+                      <h3>Track:</h3>
+                      <input type="text" />
+                    </label>
+                  </div>
+                </div>
               </div>
               {/* <label>
                 Type:{" "}
@@ -119,22 +196,23 @@ class Search extends Component {
                   <option value="show">Show</option>
                   <option value="episode">Episode</option>
                 </select>
-              </label> */}
+              </label>  */}
             </div>
           </div>
           <div className="search-results">
-            Results for '
-            {this.state.inputValue === this.state.inputPlaceholder
+            {this.state.noSearch
               ? ""
-              : this.state.pageChange
-              ? this.state.inputValue
-              : this.state.prevInputValue}
-            '
+              : "Results for '" +
+                (this.state.pageChange
+                  ? this.state.inputValue
+                  : this.state.prevInputValue) +
+                "'"}
           </div>
         </div>
         {this.state.pageChange || this.state.noSearch ? null : (
           <List
-            searchInput={`${this.state.inputValue}`}
+            searchInput={`${this.state.searchValue}`}
+            market={this.props.regionId}
             // type={this.state.typeInput}
           />
         )}

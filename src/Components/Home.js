@@ -9,6 +9,7 @@ const Home = () => {
         your favorite podcasts.
       </h2>
       <a href="/Overview">Get started</a>
+
       <p>Available in the App Stores</p>
     </section>
   );

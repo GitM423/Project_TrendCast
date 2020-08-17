@@ -8,16 +8,18 @@ class List extends Component {
     data: [],
     type: "show",
     market: "DE",
+    tempLimit: 15,
     limit: 15,
     offset: 0,
     pageChange: false,
+    pageNumber: 1,
     error: "",
   };
 
   componentDidMount() {
     console.log("search: ", this.props.searchInput);
     fetch(
-      `https://api.spotify.com/v1/search?q=${this.props.searchInput}&type=${this.state.type}&market=${this.state.market}&limit=${this.state.limit}&offset=${this.state.offset}`,
+      `https://api.spotify.com/v1/search?q=${this.props.searchInput}&type=${this.state.type}&market=${this.props.market}&limit=${this.state.limit}&offset=${this.state.offset}`,
       {
         headers: {
           Authorization: "Bearer " + apiKey,
@@ -50,8 +52,12 @@ class List extends Component {
     }
   }
   handleLimit = () => {
-    if (this.state.limit > 0 && this.state.limit <= 50) {
+    if (this.state.tempLimit > 0 && this.state.tempLimit <= 50) {
+      this.setState({ offset: 0 });
+      this.setState({ limit: this.state.tempLimit });
+
       this.setState({ pageChange: true });
+      this.setState({ pageNumber: 1 });
       this.setState({ error: "" });
     } else {
       this.setState({
@@ -61,7 +67,7 @@ class List extends Component {
   };
 
   handleLimitChange(event) {
-    this.setState({ limit: event.target.value });
+    this.setState({ tempLimit: event.target.value });
   }
   handleKeyUp = (event) => {
     if (event.keyCode === 13) {
@@ -71,34 +77,41 @@ class List extends Component {
     }
   };
   backward = () => {
-    this.setState({ offset: parseInt(this.state.offset - 1) });
+    this.setState({
+      offset: parseInt(this.state.offset) - parseInt(this.state.limit),
+    });
     this.setState({ pageChange: true });
+    this.setState({ pageNumber: this.state.pageNumber - 1 });
   };
 
   forward = () => {
-    this.setState({ offset: parseInt(this.state.offset + 1) });
+    this.setState({
+      offset: parseInt(this.state.offset) + parseInt(this.state.limit),
+    });
     this.setState({ pageChange: true });
+    this.setState({ pageNumber: this.state.pageNumber + 1 });
   };
 
   render() {
     return (
       <div className="list">
-        <div className="list-adjustments">
-          <div className="list-limit">
-            <label>
-              Set number of results per page:{" "}
-              <input
-                type="number"
-                value={this.state.limit}
-                min="1"
-                max="50"
-                onChange={(event) => this.handleLimitChange(event)}
-                onKeyUp={(event) => this.handleKeyUp(event)}
-              />
-            </label>
+        <div className="list-limit">
+          <div className="list-adjustments">
+            <label for="limit-change">Set number of results per page:</label>
+
+            <input
+              type="number"
+              value={this.state.tempLimit}
+              min="1"
+              max="50"
+              id="limit-change"
+              onChange={(event) => this.handleLimitChange(event)}
+              onKeyUp={(event) => this.handleKeyUp(event)}
+            />
             <input
               type="button"
               value="Apply Changes"
+              className="limit-apply"
               onClick={this.handleLimit}
             />
           </div>
@@ -112,7 +125,12 @@ class List extends Component {
                 id={obj.id}
                 image={obj.images[0].url}
                 name={obj.name}
-                number={this.state.limit * this.state.offset + i + 1}
+                number={
+                  parseInt(this.state.limit) * parseInt(this.state.pageNumber) -
+                  parseInt(this.state.limit) +
+                  i +
+                  1
+                }
               />
             );
           })}
@@ -134,7 +152,7 @@ class List extends Component {
               {">"}
             </button>
           </div>
-          <div className="page-count">Page {this.state.offset + 1}</div>
+          <div className="page-count">Page {this.state.pageNumber}</div>
         </div>
       </div>
     );
