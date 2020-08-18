@@ -14,8 +14,12 @@ const Footer = () => {
         <h3>Get the Free App</h3>
         <p>Now available for iPhone, iPad, Android and Alexa</p>
         <div>
-          <img src={appStore} alt="" />
-          <img src={googlePlay} alt="" />
+          <a href="">
+            <img src={appStore} alt="" />
+          </a>
+          <a href="">
+            <img src={googlePlay} alt="" />
+          </a>
         </div>
         <h5>
           <span>®</span> TrendCast 2020. All Rights reserved
@@ -51,10 +55,10 @@ const Footer = () => {
             <a href="">facebook</a>
           </li>
           <li>
-            <a href="">indeed</a>
+            <a href="">LinkedIn</a>
           </li>
           <li>
-            <a href="">instagram</a>
+            <a href="">Instagram</a>
           </li>
         </ul>
       </div>

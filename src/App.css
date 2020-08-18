@@ -11,7 +11,7 @@
   justify-content: space-between;
 }
 section {
-  padding: 0 7%;
+  padding: 7vh 7%;
   min-height: 77vh;
 }
 @media only screen and (max-width: 425px) {
@@ -39,7 +39,9 @@ header {
   grid-template-columns: repeat(4, 1fr);
   background: #222222;
   color: white;
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
   z-index: 4;
 }
 header div {
@@ -161,11 +163,11 @@ header .active-page {
 
 /* Footer */
 footer {
-  padding: 7%;
+  padding: 3% 5%;
   min-height: 21vh;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 100px;
+  gap: 15%;
   background: #222222;
   color: #ffffff;
   z-index: 4;
@@ -176,15 +178,28 @@ footer a:hover {
 footer div {
 }
 footer p {
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-bottom: 20px;
 }
-footer p span {
-  font-size: 60px;
-  padding: 0;
-  margin: 0;
+footer h3 {
+  margin: 40px 0 20px;
 }
-
+footer a:hover img {
+  opacity: 70%;
+}
+footer img {
+  margin-right: 20px;
+  height: 70px;
+}
+footer h5 {
+  margin-top: 10px;
+  font-weight: 400;
+}
+footer ul {
+  list-style: none;
+}
+footer li {
+  margin: 10px 0;
+}
 @media only screen and (max-width: 768px) {
   footer {
     grid-template-columns: 1fr;
