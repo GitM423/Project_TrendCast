@@ -39,7 +39,7 @@ header {
   grid-template-columns: repeat(4, 1fr);
   background: #222222;
   color: white;
-  position: fixed;
+  position: relative;
   top: 0;
   width: 100%;
   z-index: 4;
@@ -163,7 +163,7 @@ header .active-page {
 
 /* Footer */
 footer {
-  padding: 3% 5%;
+  padding: 50px 5%;
   min-height: 21vh;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
@@ -174,8 +174,6 @@ footer {
 }
 footer a:hover {
   text-decoration: underline;
-}
-footer div {
 }
 footer p {
   padding-bottom: 20px;
@@ -189,6 +187,7 @@ footer a:hover img {
 footer img {
   margin-right: 20px;
   height: 70px;
+  box-shadow: 0 0 2px #aaaaaa;
 }
 footer h5 {
   margin-top: 10px;
@@ -200,9 +199,17 @@ footer ul {
 footer li {
   margin: 10px 0;
 }
+
 @media only screen and (max-width: 768px) {
   footer {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+  }
+  .footer-info {
+    grid-column: 1/-1;
+  }
+  footer img {
+    max-width: 100%;
   }
 }
 
@@ -394,7 +401,7 @@ ul li {
 .para-year-value input:first-of-type {
   grid-column: 1/3;
 }
-.para-year-value p {
+.para-year-value h3 {
   margin: 0 20px;
 }
 .para-year-value input:last-of-type {

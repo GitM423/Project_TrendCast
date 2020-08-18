@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -8,8 +9,7 @@ const Home = () => {
         Audio News, Sports and Entertainment, now with exclusive contect from
         your favorite podcasts.
       </h2>
-      <a href="/Overview">Get started</a>
-
+      <Link to={`/Overview`}>Get started</Link>
       <p>Available in the App Stores</p>
     </section>
   );
