@@ -14,9 +14,15 @@ import "./App.css";
 class App extends React.Component {
   state = {
     regionId: "DE",
+    regionName: "Germany",
+    flagClicked: false,
   };
-  handleRegionId = (regionId) => {
+  handleRegionIdName = (regionId, regionName) => {
     this.setState({ regionId });
+    this.setState({ regionName });
+  };
+  handleFlagClicked = (flagClicked) => {
+    this.setState({ flagClicked: !this.state.flagClicked });
   };
   render() {
     return (
@@ -26,7 +32,8 @@ class App extends React.Component {
           <Route
             render={() => (
               <Header
-                handleRegionId={this.handleRegionId}
+                handleRegionIdName={this.handleRegionIdName}
+                handleFlagClicked={this.handleFlagClicked}
                 regionId={this.state.regionId}
               />
             )}
@@ -36,7 +43,14 @@ class App extends React.Component {
             <Route
               path="/Overview"
               exact
-              render={() => <Overview regionId={this.state.regionId} />}
+              render={() => (
+                <Overview
+                  regionId={this.state.regionId}
+                  regionName={this.state.regionName}
+                  handleFlagClicked={this.handleFlagClicked}
+                  flagClicked={this.state.flagClicked}
+                />
+              )}
             />
             <Route
               path="/Search"
@@ -46,7 +60,7 @@ class App extends React.Component {
             <Route path="/shows/:id" component={Details} />
             <Route component={NoMatch} />
           </Switch>
-          {/* <Route component={Footer} /> */}
+          <Route component={Footer} />
         </div>
       </Router>
     );

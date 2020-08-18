@@ -1,9 +1,11 @@
 import React from "react";
+import appStore from "./img/AppStore.png";
+import googlePlay from "./img/GooglePlay.png";
 
 const Footer = () => {
   return (
     <footer className="structure">
-      <div>
+      <div className="footer-info">
         <p>
           The easiest way to listen to podcasts on your iPhone, iPad, Android,
           PC, smart speaker - and even in your car. For Free. Bonus and ad-free
@@ -11,13 +13,15 @@ const Footer = () => {
         </p>
         <h3>Get the Free App</h3>
         <p>Now available for iPhone, iPad, Android and Alexa</p>
-        <div>{/* <img src="" alt="" />
-          <img src="" alt="" /> */}</div>
-        <p>
+        <div>
+          <img src={appStore} alt="" />
+          <img src={googlePlay} alt="" />
+        </div>
+        <h5>
           <span>®</span> TrendCast 2020. All Rights reserved
-        </p>
+        </h5>
       </div>
-      <div>
+      <div className="footer-about">
         <h2>About</h2>
         <ul>
           <li>
@@ -37,7 +41,7 @@ const Footer = () => {
           </li>
         </ul>
       </div>
-      <div>
+      <div className="footer-socials">
         <h2>Follow Us</h2>
         <ul>
           <li>

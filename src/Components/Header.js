@@ -2,14 +2,20 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import countries from "./countries";
 import CountryFlag from "./CountryFlag";
+
+import iconHome from "./img/icons8-home-64.png";
+import iconOverview from "./img/icons8-headphones-100.png";
+import iconSearch from "./img/icons8-search-64.png";
+
 class Header extends Component {
   state = { regionHidden: true };
   handleRegion = () => {
     this.setState({ regionHidden: !this.state.regionHidden });
   };
-  handleFlagClick = (item) => {
+  handleFlagClick = (itemId, itemName) => {
     // if (!this.state.regionHidden) {
-    this.props.handleRegionId(item);
+    this.props.handleRegionIdName(itemId, itemName);
+    this.props.handleFlagClicked();
     this.handleRegion();
     // }
   };
@@ -19,7 +25,11 @@ class Header extends Component {
       <div>
         <header className="structure">
           <div
-            className={this.state.regionHidden ? "" : "active-page"}
+            className={
+              this.state.regionHidden
+                ? "header-region"
+                : "header-region active-page"
+            }
             onClick={this.handleRegion}
           >
             {countries.map((obj) => {
@@ -43,7 +53,9 @@ class Header extends Component {
             <div
               className={window.location.pathname === "/" ? "active-page" : ""}
             >
-              {/* <img src="assets/icons8-home-64.png" alt=""> */}
+              {/* <div className="header-img">
+                <img src={iconHome} alt="" />
+              </div> */}
               <p>HOME</p>
             </div>
           </Link>
@@ -53,7 +65,9 @@ class Header extends Component {
                 window.location.pathname === "/Overview" ? "active-page" : ""
               }
             >
-              {/* <img src="assets/icons8-headphones-100.png" alt=""> */}
+              {/* <div className="header-img">
+                <img src={iconOverview} alt="" />
+              </div> */}
               <p>PODCAST</p>
             </div>
           </Link>
@@ -63,7 +77,9 @@ class Header extends Component {
                 window.location.pathname === "/Search" ? "active-page" : ""
               }
             >
-              {/* <img src="assets/icons8-search-64.png" alt=""> */}
+              {/* <div className="header-img">
+                <img src={iconSearch} alt="" />
+              </div> */}
               <p>SEARCH</p>
             </div>
           </Link>
@@ -83,7 +99,7 @@ class Header extends Component {
               return (
                 <div
                   className="country-flag"
-                  onClick={() => this.handleFlagClick(obj.id)}
+                  onClick={() => this.handleFlagClick(obj.id, obj.name)}
                 >
                   <CountryFlag
                     key={obj.id}

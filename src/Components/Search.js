@@ -114,7 +114,7 @@ class Search extends Component {
                       <h3>Album: </h3>
                       <input
                         type="text"
-                        onChange={(event) => this.handleExAlbum(event)}
+                        // onChange={(event) => this.handleExAlbum(event)}
                       />
                     </label>
 
@@ -122,7 +122,7 @@ class Search extends Component {
                       <h3>Artist: </h3>
                       <input
                         type="text"
-                        onChange={(event) => this.handleExArtist(event)}
+                        // onChange={(event) => this.handleExArtist(event)}
                       />
                     </label>
 
@@ -130,7 +130,7 @@ class Search extends Component {
                       <h3>Track: </h3>
                       <input
                         type="text"
-                        onChange={(event) => this.handleExTrack(event)}
+                        // onChange={(event) => this.handleExTrack(event)}
                       />
                     </label>
                   </div>
@@ -141,7 +141,7 @@ class Search extends Component {
                         type="radio"
                         name="year"
                         checked={!this.state.yearRangeChecked}
-                        onClick={this.handleYearCheck}
+                        // onClick={this.handleYearCheck}
                       />
                     </label>
                     <label>
@@ -156,12 +156,12 @@ class Search extends Component {
                     <div className="para-year-value">
                       <input
                         type="text"
-                        onChange={(event) => this.handleExTrack(event)}
+                        // onChange={(event) => this.handleExTrack(event)}
                       />
                       <h3>-</h3>
                       <input
                         type="text"
-                        onChange={(event) => this.handleExTrack(event)}
+                        // onChange={(event) => this.handleExTrack(event)}
                       />
                     </div>
                   </div>
